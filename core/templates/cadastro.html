@@ -1,0 +1,94 @@
+{% load static from staticfiles%}
+<html lang="pt-br">
+	<head>
+		<title>Cadastro|UnBusca</title>
+		<meta charset="utf-8">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="{% static "/js/jquery.mask.js"%}"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<link href="{% static "/css/signup.css" %}" rel="stylesheet">
+		<script>
+			function Mask(){
+				if($("#telefone").val().length>14){
+					$("#telefone").mask("(99) 99999-9999");
+				}
+				else{
+					$("#telefone").mask("(99) 9999-99990");
+				}
+				$("#matricula").mask("99/9999999");
+			}
+			Mask();
+		</script>
+	</head>
+	<body>
+		<form class="form-signup" action="/cadastrar/" method="POST">
+			{% csrf_token %}
+		  <img class="mb-4" src="{% static "/images/unBusca.png"%}" alt="UnBusca" width="300">
+          <form class="needs-validation" novalidate>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="username">Nome de Usuário</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">@</span>
+                </div>
+                <input type="text" class="form-control" id="username" name="Username" placeholder="Nome de Usuário" required>
+                <div class="invalid-feedback" style="width: 100%;">
+                  Insira um nome de usuário.
+                </div>
+              </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="password">Senha</label>
+                <input type="password" class="form-control" id="password" name="Password" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                  Insira uma senha válida.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+       
+              <label for="Name">Nome</label>
+                <input type="text" class="form-control" id="Name" name="Name" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                  Insira um nome válido.
+                </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="Email" placeholder="usuário@email.com" required>
+              <div class="invalid-feedback">
+                Insira um endereço de email válido.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="telefone">Telefone</label>
+              <input type="tel" class="form-control" id="telefone" name="Telephone" placeholder="(00) 0000-0000" required onchange="Mask();">
+              <div class="invalid-feedback">
+                Insira um número de telefone válido.
+              </div>
+            </div>
+			<div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="nascimento">Data de Nascimento:</label>
+                <input type="date" class="form-control" id="nascimento" name="Birthday" required>
+                <div class="invalid-feedback">
+                  Insira uma data de nascimento válido.
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="lastName">Número de matricula</label>
+                <input type="text" class="form-control" id="matricula" name="Matricula" placeholder="00/0000000" required onchange="Mask();">
+                <div class="invalid-feedback">
+                  Insira um número de matricula válido.
+                </div>
+              </div>
+            </div>
+		  <button class="btn btn-lg btn-primary btn-block" type="submit">Enviar</button>
+		</form>
+	</body>
+</html>
