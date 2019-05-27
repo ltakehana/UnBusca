@@ -17,16 +17,10 @@ class USER(models.Model):
 	USER_MATRICULA = models.CharField(max_length=16)
 	USER_DESCRIPTION = models.CharField(max_length=255)
 	USER_CAMPUS = models.CharField(max_length=64,unique=True)
+	USER_IMAGE = models.CharField(max_length=64,null=True)
 	def __srt__(self):
 		return(self.USER_NAME)
 
-class IMAGE(models.Model):
-	IMAGES_ID = models.AutoField(primary_key=True)
-	IMAGES_URL = models.ImageField()
-
-class TAG(models.Model):
-	TAG_ID = models.AutoField(primary_key=True)
-	TAG_NAME = models.CharField(max_length=32)
 
 class POST(models.Model):
 	POST_ID = models.AutoField(primary_key=True)
@@ -34,7 +28,8 @@ class POST(models.Model):
 	POST_BASE = models.ForeignKey('POST',null=True)
 	POST_TITLE = models.CharField(max_length=128)
 	POST_TEXT = models.TextField()
-	POST_IMAGES = models.ManyToManyField(IMAGE,blank=True)
+	POST_TAGS = models.TextField(null=True)
+	POST_IMAGE = models.CharField(max_length=128,null=True)
 	POST_LOCAL = models.CharField(max_length=128)
 	POST_TIME = models.DateTimeField(default=now)
 	
